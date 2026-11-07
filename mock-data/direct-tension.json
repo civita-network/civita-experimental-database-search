@@ -1,0 +1,173 @@
+{
+  "format": "civita-mock-v1",
+  "synthetic": true,
+  "dataset_id": "direct-tension",
+  "records": {
+    "literature_sources": [
+      {
+        "source_id": "SRC0003",
+        "title": "Direct tension of cementitious composites",
+        "authors": "CIVITA demonstration team",
+        "year": 2025,
+        "source_type": "dataset",
+        "peer_reviewed": "no",
+        "notes": "Entirely synthetic demonstration program. Values are illustrative."
+      }
+    ],
+    "keywords": [
+      {
+        "source_id": "SRC0003",
+        "keyword": "direct tension"
+      },
+      {
+        "source_id": "SRC0003",
+        "keyword": "dog bone"
+      },
+      {
+        "source_id": "SRC0003",
+        "keyword": "cementitious composite"
+      },
+      {
+        "source_id": "SRC0003",
+        "keyword": "strain hardening"
+      },
+      {
+        "source_id": "SRC0003",
+        "keyword": "digital image correlation"
+      }
+    ],
+    "material_batches": [
+      {
+        "batch_id": "BAT0001",
+        "source_id": "SRC0003",
+        "batch_label": "ECC-PVA",
+        "material_class": "engineered_cementitious_composites",
+        "cement_content_kg_m3": 570,
+        "water_binder_ratio": 0.33,
+        "printable": "no",
+        "date_of_pouring_yyyy_mm_dd": "2025-02-06"
+      },
+      {
+        "batch_id": "BAT0002",
+        "source_id": "SRC0003",
+        "batch_label": "Reference paste",
+        "material_class": "cement_paste",
+        "cement_content_kg_m3": 720,
+        "water_binder_ratio": 0.39,
+        "printable": "no"
+      }
+    ],
+    "geometries": [
+      {
+        "geometry_id": "GEO0001",
+        "source_id": "SRC0003",
+        "specimen_geometry_type": "dog_bone",
+        "geometry_file_name": "GEO0001_geometry.json"
+      }
+    ],
+    "specimens": [
+      {
+        "specimen_id": "SPC0001",
+        "source_id": "SRC0003",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      },
+      {
+        "specimen_id": "SPC0002",
+        "source_id": "SRC0003",
+        "batch_id": "BAT0002",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      }
+    ],
+    "tests": [
+      {
+        "test_id": "TST0001",
+        "source_id": "SRC0003",
+        "specimen_id": "SPC0001",
+        "test_type": "direct_tensile_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | tensile_failure"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0002",
+        "source_id": "SRC0003",
+        "specimen_id": "SPC0002",
+        "test_type": "direct_tensile_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | tensile_failure"
+        ]
+      }
+    ],
+    "data": [
+      {
+        "data_id": "DAT0001",
+        "source_id": "SRC0003",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "device_id": "DEV0001",
+        "x_quantity_reported": "strain",
+        "y_quantity_reported": "stress",
+        "file_name": "DAT0001_stress_strain.csv"
+      },
+      {
+        "data_id": "DAT0002",
+        "source_id": "SRC0003",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0002",
+        "data_type": "scalar",
+        "device_id": "DEV0002",
+        "quantity_reported": "tensile_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 4.6,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0003",
+        "source_id": "SRC0003",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "x_quantity_reported": "strain",
+        "y_quantity_reported": "stress",
+        "file_name": "DAT0003_stress_strain.csv"
+      }
+    ],
+    "devices_and_supports": [
+      {
+        "device_id": "DEV0001",
+        "source_id": "SRC0003",
+        "test_id": "TST0001",
+        "device_type": "actuator"
+      },
+      {
+        "device_id": "DEV0002",
+        "source_id": "SRC0003",
+        "test_id": "TST0001",
+        "device_type": "LVDT"
+      }
+    ],
+    "loading_histories": [
+      {
+        "loading_id": "LDG0001",
+        "source_id": "SRC0003",
+        "test_id": "TST0001",
+        "device_id": "DEV0001",
+        "loading_mode": "monotonic"
+      }
+    ]
+  }
+}
+

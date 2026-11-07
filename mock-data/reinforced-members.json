@@ -1,0 +1,232 @@
+{
+  "format": "civita-mock-v1",
+  "synthetic": true,
+  "dataset_id": "reinforced-members",
+  "records": {
+    "literature_sources": [
+      {
+        "source_id": "SRC0004",
+        "title": "Reinforced concrete beams and cyclic columns",
+        "authors": "CIVITA demonstration team",
+        "year": 2022,
+        "source_type": "dataset",
+        "peer_reviewed": "no",
+        "notes": "Entirely synthetic demonstration program. Values are illustrative."
+      }
+    ],
+    "keywords": [
+      {
+        "source_id": "SRC0004",
+        "keyword": "reinforced concrete"
+      },
+      {
+        "source_id": "SRC0004",
+        "keyword": "longitudinal reinforcement"
+      },
+      {
+        "source_id": "SRC0004",
+        "keyword": "stirrups"
+      },
+      {
+        "source_id": "SRC0004",
+        "keyword": "cyclic loading"
+      },
+      {
+        "source_id": "SRC0004",
+        "keyword": "column"
+      }
+    ],
+    "material_batches": [
+      {
+        "batch_id": "BAT0001",
+        "source_id": "SRC0004",
+        "batch_label": "RC-45",
+        "material_class": "normal_weight_concrete",
+        "cement_content_kg_m3": 385,
+        "water_binder_ratio": 0.44,
+        "printable": "no",
+        "date_of_pouring_yyyy_mm_dd": "2022-02-06",
+        "max_aggregate_size_mm": 16
+      }
+    ],
+    "geometries": [
+      {
+        "geometry_id": "GEO0001",
+        "source_id": "SRC0004",
+        "specimen_geometry_type": "beam",
+        "geometry_file_name": "GEO0001_geometry.json"
+      },
+      {
+        "geometry_id": "GEO0002",
+        "source_id": "SRC0004",
+        "specimen_geometry_type": "prism",
+        "geometry_file_name": "GEO0002_geometry.json"
+      }
+    ],
+    "specimens": [
+      {
+        "specimen_id": "SPC0001",
+        "source_id": "SRC0004",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "yes",
+        "transverse_reinforcement": "yes",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      },
+      {
+        "specimen_id": "SPC0002",
+        "source_id": "SRC0004",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0002",
+        "longitudinal_reinforcement": "yes",
+        "transverse_reinforcement": "yes",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      }
+    ],
+    "tests": [
+      {
+        "test_id": "TST0001",
+        "source_id": "SRC0004",
+        "specimen_id": "SPC0001",
+        "test_type": "four_point_bending_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | ductility"
+        ],
+        "age_days": 56
+      },
+      {
+        "test_id": "TST0002",
+        "source_id": "SRC0004",
+        "specimen_id": "SPC0002",
+        "test_type": "cyclic_lateral_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | energy_dissipation"
+        ],
+        "age_days": 56
+      }
+    ],
+    "data": [
+      {
+        "data_id": "DAT0001",
+        "source_id": "SRC0004",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "device_id": "DEV0001",
+        "x_quantity_reported": "deflection",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0001_load_deflection.csv"
+      },
+      {
+        "data_id": "DAT0002",
+        "source_id": "SRC0004",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0002",
+        "data_type": "image",
+        "device_id": "DEV0002",
+        "name": "Crack map",
+        "filename": "DAT0002_cracks.png"
+      },
+      {
+        "data_id": "DAT0003",
+        "source_id": "SRC0004",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "x_quantity_reported": "displacement",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0003_load_displacement.csv"
+      }
+    ],
+    "devices_and_supports": [
+      {
+        "device_id": "DEV0001",
+        "source_id": "SRC0004",
+        "test_id": "TST0001",
+        "device_type": "load_cell"
+      },
+      {
+        "device_id": "DEV0002",
+        "source_id": "SRC0004",
+        "test_id": "TST0001",
+        "device_type": "LVDT"
+      }
+    ],
+    "loading_histories": [
+      {
+        "loading_id": "LDG0001",
+        "source_id": "SRC0004",
+        "test_id": "TST0001",
+        "device_id": "DEV0001",
+        "loading_mode": "monotonic"
+      }
+    ],
+    "reinforcement_layouts": [
+      {
+        "reinforcement_layout_id": "RFL0001",
+        "source_id": "SRC0004",
+        "geometry_id": "GEO0001"
+      },
+      {
+        "reinforcement_layout_id": "RFL0002",
+        "source_id": "SRC0004",
+        "geometry_id": "GEO0002"
+      }
+    ],
+    "reinforcement_materials": [
+      {
+        "reinforcement_material_id": "RMT0001",
+        "source_id": "SRC0004",
+        "reinforcement_material_type": "black_steel"
+      },
+      {
+        "reinforcement_material_id": "RMT0002",
+        "source_id": "SRC0004",
+        "reinforcement_material_type": "stainless_steel"
+      }
+    ],
+    "reinforcement_components": [
+      {
+        "reinforcement_component_id": "REF0001",
+        "source_id": "SRC0004",
+        "reinforcement_material_id": "RMT0001",
+        "reinforcement_layout_id": "RFL0001",
+        "reinforcement_type": "tensile_bar"
+      },
+      {
+        "reinforcement_component_id": "REF0002",
+        "source_id": "SRC0004",
+        "reinforcement_material_id": "RMT0001",
+        "reinforcement_layout_id": "RFL0001",
+        "reinforcement_type": "2_legs_stirrups"
+      },
+      {
+        "reinforcement_component_id": "REF0003",
+        "source_id": "SRC0004",
+        "reinforcement_material_id": "RMT0002",
+        "reinforcement_layout_id": "RFL0002",
+        "reinforcement_type": "tensile_bar"
+      },
+      {
+        "reinforcement_component_id": "REF0004",
+        "source_id": "SRC0004",
+        "reinforcement_material_id": "RMT0002",
+        "reinforcement_layout_id": "RFL0002",
+        "reinforcement_type": "2_legs_stirrups"
+      }
+    ]
+  },
+  "specimen_links": {
+    "SPC0001": {
+      "reinforcement_layout_id": "RFL0001"
+    },
+    "SPC0002": {
+      "reinforcement_layout_id": "RFL0002"
+    }
+  }
+}
+

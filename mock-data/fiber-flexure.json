@@ -1,0 +1,229 @@
+{
+  "format": "civita-mock-v1",
+  "synthetic": true,
+  "dataset_id": "fiber-flexure",
+  "records": {
+    "literature_sources": [
+      {
+        "source_id": "SRC0002",
+        "title": "Steel fiber dosage and flexural response",
+        "authors": "CIVITA demonstration team",
+        "year": 2023,
+        "source_type": "dataset",
+        "peer_reviewed": "no",
+        "notes": "Entirely synthetic demonstration program. Values are illustrative."
+      }
+    ],
+    "keywords": [
+      {
+        "source_id": "SRC0002",
+        "keyword": "steel fibers"
+      },
+      {
+        "source_id": "SRC0002",
+        "keyword": "fiber reinforced concrete"
+      },
+      {
+        "source_id": "SRC0002",
+        "keyword": "four point bending"
+      },
+      {
+        "source_id": "SRC0002",
+        "keyword": "flexure"
+      },
+      {
+        "source_id": "SRC0002",
+        "keyword": "residual strength"
+      }
+    ],
+    "material_batches": [
+      {
+        "batch_id": "BAT0001",
+        "source_id": "SRC0002",
+        "batch_label": "SF-35",
+        "material_class": "fiber_reinforced_concrete",
+        "cement_content_kg_m3": 410,
+        "water_binder_ratio": 0.41,
+        "printable": "no",
+        "date_of_pouring_yyyy_mm_dd": "2023-02-06",
+        "max_aggregate_size_mm": 12,
+        "fiber_type": "steel",
+        "fiber_length_mm": 30
+      },
+      {
+        "batch_id": "BAT0002",
+        "source_id": "SRC0002",
+        "batch_label": "SF-60",
+        "material_class": "fiber_reinforced_concrete",
+        "cement_content_kg_m3": 430,
+        "water_binder_ratio": 0.39,
+        "printable": "no",
+        "max_aggregate_size_mm": 12,
+        "fiber_type": "steel",
+        "fiber_length_mm": 35
+      }
+    ],
+    "geometries": [
+      {
+        "geometry_id": "GEO0001",
+        "source_id": "SRC0002",
+        "specimen_geometry_type": "prism",
+        "geometry_file_name": "GEO0001_geometry.json"
+      },
+      {
+        "geometry_id": "GEO0002",
+        "source_id": "SRC0002",
+        "specimen_geometry_type": "cylinder",
+        "geometry_file_name": "GEO0002_geometry.json"
+      }
+    ],
+    "specimens": [
+      {
+        "specimen_id": "SPC0001",
+        "source_id": "SRC0002",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      },
+      {
+        "specimen_id": "SPC0002",
+        "source_id": "SRC0002",
+        "batch_id": "BAT0002",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      },
+      {
+        "specimen_id": "SPC0003",
+        "source_id": "SRC0002",
+        "batch_id": "BAT0002",
+        "geometry_id": "GEO0002",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      }
+    ],
+    "tests": [
+      {
+        "test_id": "TST0001",
+        "source_id": "SRC0002",
+        "specimen_id": "SPC0001",
+        "test_type": "four_point_bending_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "fracture | crack_localization"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0002",
+        "source_id": "SRC0002",
+        "specimen_id": "SPC0002",
+        "test_type": "four_point_bending_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | ductility"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0003",
+        "source_id": "SRC0002",
+        "specimen_id": "SPC0003",
+        "test_type": "axial_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | unconfined_compressive_failure"
+        ],
+        "age_days": 28
+      }
+    ],
+    "data": [
+      {
+        "data_id": "DAT0001",
+        "source_id": "SRC0002",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "device_id": "DEV0001",
+        "x_quantity_reported": "deflection",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0001_load_deflection.csv"
+      },
+      {
+        "data_id": "DAT0002",
+        "source_id": "SRC0002",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0002",
+        "data_type": "scalar",
+        "device_id": "DEV0002",
+        "quantity_reported": "flexural_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 6.8,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0003",
+        "source_id": "SRC0002",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "x_quantity_reported": "deflection",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0003_load_deflection.csv"
+      },
+      {
+        "data_id": "DAT0004",
+        "source_id": "SRC0002",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0002",
+        "data_type": "scalar",
+        "quantity_reported": "flexural_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 8.2,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0005",
+        "source_id": "SRC0002",
+        "test_id": "TST0003",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 62,
+        "units": "MPa"
+      }
+    ],
+    "devices_and_supports": [
+      {
+        "device_id": "DEV0001",
+        "source_id": "SRC0002",
+        "test_id": "TST0001",
+        "device_type": "load_cell"
+      },
+      {
+        "device_id": "DEV0002",
+        "source_id": "SRC0002",
+        "test_id": "TST0001",
+        "device_type": "LVDT"
+      }
+    ],
+    "loading_histories": [
+      {
+        "loading_id": "LDG0001",
+        "source_id": "SRC0002",
+        "test_id": "TST0001",
+        "device_id": "DEV0001",
+        "loading_mode": "monotonic"
+      }
+    ]
+  }
+}
+

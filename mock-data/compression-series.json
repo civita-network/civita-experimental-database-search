@@ -1,0 +1,198 @@
+{
+  "format": "civita-mock-v1",
+  "synthetic": true,
+  "dataset_id": "compression-series",
+  "records": {
+    "literature_sources": [
+      {
+        "source_id": "SRC0006",
+        "title": "Compression across aggregate sizes and curing ages",
+        "authors": "CIVITA demonstration team",
+        "year": 2021,
+        "source_type": "dataset",
+        "peer_reviewed": "no",
+        "notes": "Entirely synthetic demonstration program. Values are illustrative."
+      }
+    ],
+    "keywords": [
+      {
+        "source_id": "SRC0006",
+        "keyword": "uniaxial compression"
+      },
+      {
+        "source_id": "SRC0006",
+        "keyword": "concrete cylinders"
+      },
+      {
+        "source_id": "SRC0006",
+        "keyword": "aggregate size"
+      },
+      {
+        "source_id": "SRC0006",
+        "keyword": "curing age"
+      },
+      {
+        "source_id": "SRC0006",
+        "keyword": "compressive strength"
+      }
+    ],
+    "material_batches": [
+      {
+        "batch_id": "BAT0001",
+        "source_id": "SRC0006",
+        "batch_label": "NC-32",
+        "material_class": "normal_weight_concrete",
+        "cement_content_kg_m3": 325,
+        "water_binder_ratio": 0.53,
+        "printable": "no",
+        "date_of_pouring_yyyy_mm_dd": "2021-02-06",
+        "max_aggregate_size_mm": 19
+      },
+      {
+        "batch_id": "BAT0002",
+        "source_id": "SRC0006",
+        "batch_label": "NC-52",
+        "material_class": "normal_weight_concrete",
+        "cement_content_kg_m3": 390,
+        "water_binder_ratio": 0.42,
+        "printable": "no",
+        "max_aggregate_size_mm": 16
+      }
+    ],
+    "geometries": [
+      {
+        "geometry_id": "GEO0001",
+        "source_id": "SRC0006",
+        "specimen_geometry_type": "cylinder",
+        "geometry_file_name": "GEO0001_geometry.json"
+      }
+    ],
+    "specimens": [
+      {
+        "specimen_id": "SPC0001",
+        "source_id": "SRC0006",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      },
+      {
+        "specimen_id": "SPC0002",
+        "source_id": "SRC0006",
+        "batch_id": "BAT0002",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      }
+    ],
+    "tests": [
+      {
+        "test_id": "TST0001",
+        "source_id": "SRC0006",
+        "specimen_id": "SPC0001",
+        "test_type": "axial_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | unconfined_compressive_failure"
+        ],
+        "age_days": 7
+      },
+      {
+        "test_id": "TST0002",
+        "source_id": "SRC0006",
+        "specimen_id": "SPC0001",
+        "test_type": "axial_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | unconfined_compressive_failure"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0003",
+        "source_id": "SRC0006",
+        "specimen_id": "SPC0002",
+        "test_type": "axial_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | unconfined_compressive_failure"
+        ],
+        "age_days": 28
+      }
+    ],
+    "data": [
+      {
+        "data_id": "DAT0001",
+        "source_id": "SRC0006",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "device_id": "DEV0001",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 24.5,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0002",
+        "source_id": "SRC0006",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 33.6,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0003",
+        "source_id": "SRC0006",
+        "test_id": "TST0003",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 51.2,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0004",
+        "source_id": "SRC0006",
+        "test_id": "TST0003",
+        "test_repeat_id": "TRP0002",
+        "data_type": "curve",
+        "x_quantity_reported": "strain",
+        "y_quantity_reported": "stress",
+        "file_name": "DAT0004_stress_strain.csv"
+      }
+    ],
+    "devices_and_supports": [
+      {
+        "device_id": "DEV0001",
+        "source_id": "SRC0006",
+        "test_id": "TST0001",
+        "device_type": "actuator"
+      },
+      {
+        "device_id": "DEV0002",
+        "source_id": "SRC0006",
+        "test_id": "TST0001",
+        "device_type": "LVDT"
+      }
+    ],
+    "loading_histories": [
+      {
+        "loading_id": "LDG0001",
+        "source_id": "SRC0006",
+        "test_id": "TST0001",
+        "device_id": "DEV0001",
+        "loading_mode": "monotonic"
+      }
+    ]
+  }
+}
+

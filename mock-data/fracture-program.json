@@ -1,0 +1,257 @@
+{
+  "format": "civita-mock-v1",
+  "synthetic": true,
+  "dataset_id": "fracture-program",
+  "records": {
+    "literature_sources": [
+      {
+        "source_id": "SRC0001",
+        "title": "Notched beam fracture and reference compression",
+        "authors": "CIVITA demonstration team",
+        "year": 2024,
+        "source_type": "dataset",
+        "peer_reviewed": "no",
+        "notes": "Entirely synthetic demonstration program. Values are illustrative."
+      }
+    ],
+    "keywords": [
+      {
+        "source_id": "SRC0001",
+        "keyword": "fracture"
+      },
+      {
+        "source_id": "SRC0001",
+        "keyword": "three point bending"
+      },
+      {
+        "source_id": "SRC0001",
+        "keyword": "compression"
+      },
+      {
+        "source_id": "SRC0001",
+        "keyword": "notched beam"
+      },
+      {
+        "source_id": "SRC0001",
+        "keyword": "plain concrete"
+      }
+    ],
+    "material_batches": [
+      {
+        "batch_id": "BAT0001",
+        "source_id": "SRC0001",
+        "batch_label": "Mix F40",
+        "material_class": "normal_weight_concrete",
+        "cement_content_kg_m3": 360,
+        "water_binder_ratio": 0.47,
+        "printable": "no",
+        "date_of_pouring_yyyy_mm_dd": "2024-02-06",
+        "max_aggregate_size_mm": 8
+      },
+      {
+        "batch_id": "BAT0002",
+        "source_id": "SRC0001",
+        "batch_label": "Mix H80",
+        "material_class": "high_performance_concrete",
+        "cement_content_kg_m3": 480,
+        "water_binder_ratio": 0.29,
+        "printable": "no",
+        "max_aggregate_size_mm": 20
+      }
+    ],
+    "geometries": [
+      {
+        "geometry_id": "GEO0001",
+        "source_id": "SRC0001",
+        "specimen_geometry_type": "notched_beam",
+        "geometry_file_name": "GEO0001_geometry.json"
+      },
+      {
+        "geometry_id": "GEO0002",
+        "source_id": "SRC0001",
+        "specimen_geometry_type": "cylinder",
+        "geometry_file_name": "GEO0002_geometry.json"
+      }
+    ],
+    "specimens": [
+      {
+        "specimen_id": "SPC0001",
+        "source_id": "SRC0001",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      },
+      {
+        "specimen_id": "SPC0002",
+        "source_id": "SRC0001",
+        "batch_id": "BAT0002",
+        "geometry_id": "GEO0002",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      },
+      {
+        "specimen_id": "SPC0003",
+        "source_id": "SRC0001",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0002",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "no"
+      }
+    ],
+    "tests": [
+      {
+        "test_id": "TST0001",
+        "source_id": "SRC0001",
+        "specimen_id": "SPC0001",
+        "test_type": "three_point_bending_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "fracture | fracture_propagation",
+          "fracture | crack_localization"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0002",
+        "source_id": "SRC0001",
+        "specimen_id": "SPC0002",
+        "test_type": "axial_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | unconfined_compressive_failure"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0003",
+        "source_id": "SRC0001",
+        "specimen_id": "SPC0003",
+        "test_type": "axial_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | unconfined_compressive_failure"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0004",
+        "source_id": "SRC0001",
+        "specimen_id": "SPC0001",
+        "test_type": "three_point_bending_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "fracture | crack_localization"
+        ],
+        "age_days": 56
+      }
+    ],
+    "data": [
+      {
+        "data_id": "DAT0001",
+        "source_id": "SRC0001",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "device_id": "DEV0001",
+        "x_quantity_reported": "CMOD",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0001_load_CMOD.csv"
+      },
+      {
+        "data_id": "DAT0002",
+        "source_id": "SRC0001",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0002",
+        "data_type": "curve",
+        "device_id": "DEV0002",
+        "x_quantity_reported": "deflection",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0002_load_deflection.csv"
+      },
+      {
+        "data_id": "DAT0003",
+        "source_id": "SRC0001",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 80,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0004",
+        "source_id": "SRC0001",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0002",
+        "data_type": "curve",
+        "x_quantity_reported": "strain",
+        "y_quantity_reported": "stress",
+        "file_name": "DAT0004_stress_strain.csv"
+      },
+      {
+        "data_id": "DAT0005",
+        "source_id": "SRC0001",
+        "test_id": "TST0003",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 40000,
+        "units": "kPa"
+      },
+      {
+        "data_id": "DAT0006",
+        "source_id": "SRC0001",
+        "test_id": "TST0003",
+        "test_repeat_id": "TRP0002",
+        "data_type": "scalar",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 41.2,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0007",
+        "source_id": "SRC0001",
+        "test_id": "TST0004",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "x_quantity_reported": "CMOD",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0007_load_CMOD.csv"
+      }
+    ],
+    "devices_and_supports": [
+      {
+        "device_id": "DEV0001",
+        "source_id": "SRC0001",
+        "test_id": "TST0001",
+        "device_type": "load_cell"
+      },
+      {
+        "device_id": "DEV0002",
+        "source_id": "SRC0001",
+        "test_id": "TST0001",
+        "device_type": "LVDT"
+      }
+    ],
+    "loading_histories": [
+      {
+        "loading_id": "LDG0001",
+        "source_id": "SRC0001",
+        "test_id": "TST0001",
+        "device_id": "DEV0001",
+        "loading_mode": "monotonic"
+      }
+    ]
+  }
+}
+

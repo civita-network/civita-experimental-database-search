@@ -1,0 +1,2184 @@
+{
+  "generated": "Derived from the shared JSON by scripts/generate-parameter-registry.mjs",
+  "categories": [
+    {
+      "id": "literature_sources",
+      "label": "Literature sources",
+      "identifier": "source_id",
+      "example": "SRC0001",
+      "description": "Top-level entity representing one publication, report, thesis, dataset, or experimental campaign.",
+      "parents": [],
+      "schemaFile": "literature_sources_schema.json"
+    },
+    {
+      "id": "keywords",
+      "label": "Keywords",
+      "identifier": "keyword",
+      "description": "Searchable descriptors associated with the source or dataset.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        }
+      ],
+      "schemaFile": "keywords_schema.json"
+    },
+    {
+      "id": "material_batches",
+      "label": "Material batches",
+      "identifier": "batch_id",
+      "example": "BAT0001",
+      "description": "Material mixture, batch, or material system definition.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        }
+      ],
+      "schemaFile": "material_batches_schema.json"
+    },
+    {
+      "id": "geometries",
+      "label": "Geometries",
+      "identifier": "geometry_id",
+      "example": "GEO0001",
+      "description": "Reusable specimen geometry definition based on the geometry parametrization library.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        }
+      ],
+      "schemaFile": "geometry_schema.json"
+    },
+    {
+      "id": "printing_variables",
+      "label": "Printing variables",
+      "identifier": "printing_id",
+      "example": "PRI0001",
+      "description": "Reusable definition of printing processes.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "reinforcement_materials",
+      "label": "Reinforcement materials",
+      "identifier": "reinforcement_material_id",
+      "example": "RMT0001",
+      "description": "Reusable definition of properties for reinforcement materials.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "reinforcement_layouts",
+      "label": "Reinforcement layouts",
+      "identifier": "reinforcement_layout_id",
+      "example": "RFL0001",
+      "description": "Reusable definition of a reinforcement layout associated with a specimen geometry. Combines multiple reinforcement components into a complete reinforcement configuration defined with respect to the coordinate system and geometric parametrization of the associated specimen geometry.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        },
+        {
+          "category": "geometries",
+          "field": "geometry_id",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "reinforcement_components",
+      "label": "Reinforcement components",
+      "identifier": "reinforcement_component_id",
+      "example": "REF0001",
+      "description": "Reusable definition of reinforcement components. Represents one reinforcement component, e.g., rebar layer, stirrup set, tie set, or external reinforcement system, associated with a reinforcement layout. Combines reinforcement geometrical information and material properties to define one component of a reinforcement layout.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        },
+        {
+          "category": "reinforcement_materials",
+          "field": "reinforcement_material_id",
+          "optional": false
+        },
+        {
+          "category": "reinforcement_layouts",
+          "field": "reinforcement_layout_id",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "specimens",
+      "label": "Specimens",
+      "identifier": "specimen_id",
+      "example": "SPC0001",
+      "description": "Intermediate entity representing a physical specimen or specimen family defined by the combination of material batch, geometry, optional reinforcement, and optional printing variables.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        },
+        {
+          "category": "material_batches",
+          "field": "batch_id",
+          "optional": false
+        },
+        {
+          "category": "geometries",
+          "field": "geometry_id",
+          "optional": false
+        },
+        {
+          "category": "printing_variables",
+          "field": "printing_id",
+          "optional": true
+        },
+        {
+          "category": "reinforcement_layouts",
+          "field": "reinforcement_layout_id",
+          "optional": true
+        }
+      ],
+      "schemaFile": "specimens_schema.json"
+    },
+    {
+      "id": "tests",
+      "label": "Tests",
+      "identifier": "test_id",
+      "example": "TST0001",
+      "description": "Experimental test performed on a specimen.",
+      "parents": [
+        {
+          "category": "literature_sources",
+          "field": "source_id",
+          "optional": false
+        },
+        {
+          "category": "specimens",
+          "field": "specimen_id",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "devices_and_supports",
+      "label": "Devices and supports",
+      "identifier": "device_id",
+      "example": "DEV0001",
+      "description": "Support, actuator, sensor, fixture, instrumentation component, or measurement device associated with a test.",
+      "parents": [
+        {
+          "category": "tests",
+          "field": "test_id",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "loading_histories",
+      "label": "Loading histories",
+      "identifier": "loading_id",
+      "example": "LDG0001",
+      "description": "Loading protocol or loading time history associated with a test and, when applicable, with a device.",
+      "parents": [
+        {
+          "category": "tests",
+          "field": "test_id",
+          "optional": false
+        },
+        {
+          "category": "devices_and_supports",
+          "field": "device_id",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "label": "Data",
+      "identifier": "data_id",
+      "example": "DAT0001",
+      "description": "Experimental observation or dataset, including scalar quantities, curves, tables, images, videos, and multidimensional fields.",
+      "parents": [
+        {
+          "category": "tests",
+          "field": "test_id",
+          "optional": false
+        },
+        {
+          "category": "devices_and_supports",
+          "field": "device_id",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "id": "geometries.geometry_id",
+      "category": "geometries",
+      "entityType": "geometries",
+      "fieldName": "geometry_id",
+      "label": "Geometry ID",
+      "description": "Unique geometry identifier.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "geometry_schema.json",
+        "path": "#/properties/geometry_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "geometries.source_id",
+      "category": "geometries",
+      "entityType": "geometries",
+      "fieldName": "source_id",
+      "label": "Source ID",
+      "description": "Source identifier.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "geometry_schema.json",
+        "path": "#/properties/source_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "geometries.specimen_geometry_type",
+      "category": "geometries",
+      "entityType": "geometries",
+      "fieldName": "specimen_geometry_type",
+      "label": "Geometry type",
+      "description": "Geometry type defined in the geometry parametrization library.",
+      "dataType": "enum",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "in",
+        "notIn",
+        "has",
+        "missing"
+      ],
+      "options": [
+        "prism",
+        "cube",
+        "cylinder",
+        "beam",
+        "notched_beam",
+        "panel",
+        "wall",
+        "plate",
+        "l_shaped",
+        "dog_bone"
+      ],
+      "source": {
+        "file": "geometry_schema.json",
+        "path": "#/properties/specimen_geometry_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "geometries.geometry_file_name",
+      "category": "geometries",
+      "entityType": "geometries",
+      "fieldName": "geometry_file_name",
+      "label": "Geometry file name",
+      "description": "CSV or JSON file containing the geometry parameters according to the geometry parametrization library.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "geometry_schema.json",
+        "path": "#/properties/geometry_file_name",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "keywords.source_id",
+      "category": "keywords",
+      "entityType": "keywords",
+      "fieldName": "source_id",
+      "label": "Source ID",
+      "description": "Identifier of the source associated with the keyword.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "keywords_schema.json",
+        "path": "#/items/properties/source_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "keywords.keyword",
+      "category": "keywords",
+      "entityType": "keywords",
+      "fieldName": "keyword",
+      "label": "Keyword",
+      "description": "Searchable keyword describing materials, specimen types, experimental methods, loading conditions, mechanisms, environmental conditions, measurement techniques, or data modalities associated with the dataset.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "keywords_schema.json",
+        "path": "#/items/properties/keyword",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.source_id",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "source_id",
+      "label": "Source ID",
+      "description": "Unique identifier of the source document, dataset, report, thesis, or experimental campaign.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/source_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.source_type",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "source_type",
+      "label": "Source type",
+      "description": "Type of source. Must correspond to an entry in the controlled vocabulary source_types.json.",
+      "dataType": "enum",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "in",
+        "notIn",
+        "has",
+        "missing"
+      ],
+      "options": [
+        "journal_article",
+        "conference_paper",
+        "book_chapter",
+        "phd_thesis",
+        "report",
+        "dataset",
+        "other"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/source_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.peer_reviewed",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "peer_reviewed",
+      "label": "Peer reviewed",
+      "description": "Indicates whether the source was peer reviewed.",
+      "dataType": "enum",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "in",
+        "notIn",
+        "has",
+        "missing"
+      ],
+      "options": [
+        "yes",
+        "no",
+        "unknown"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/peer_reviewed",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.title",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "title",
+      "label": "Title",
+      "description": "Full title of the source.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/title",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.authors",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "authors",
+      "label": "Authors",
+      "description": "Author list as reported in the source. Multiple authors should be comma-separated.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/authors",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.year",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "year",
+      "label": "Year",
+      "description": "Publication or release year.",
+      "dataType": "number",
+      "schemaType": "integer",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/year",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.journal_or_publisher",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "journal_or_publisher",
+      "label": "Journal or publisher",
+      "description": "Journal name, publisher, report agency, hosting institution, or conference proceedings.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/journal_or_publisher",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.volume",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "volume",
+      "label": "Volume",
+      "description": "Volume number if available.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/volume",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.issue",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "issue",
+      "label": "Issue",
+      "description": "Issue number if available.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/issue",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.pages",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "pages",
+      "label": "Pages",
+      "description": "Page range or article number.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/pages",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.doi",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "doi",
+      "label": "DOI",
+      "description": "Digital Object Identifier.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/doi",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.url",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "url",
+      "label": "URL",
+      "description": "URL to the source or dataset record.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/url",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.institution",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "institution",
+      "label": "Institution",
+      "description": "Institution associated with a report, thesis, dataset, or experimental campaign.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/institution",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "literature_sources.notes",
+      "category": "literature_sources",
+      "entityType": "literature_sources",
+      "fieldName": "notes",
+      "label": "Notes",
+      "description": "Additional notes useful for identifying the source.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "literature_sources_schema.json",
+        "path": "#/properties/notes",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.batch_id",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "batch_id",
+      "label": "Batch ID",
+      "description": "Unique identifier for the material batch.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/batch_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.source_id",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "source_id",
+      "label": "Source ID",
+      "description": "Source identifier.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/source_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.mixing_protocol_file_name",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "mixing_protocol_file_name",
+      "label": "Mixing protocol file name",
+      "description": "Text file describing the mixing, batching, curing, or specimen preparation protocol.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/mixing_protocol_file_name",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.batch_label",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "batch_label",
+      "label": "Batch label",
+      "description": "Label used in the original source.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/batch_label",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.material_class",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "material_class",
+      "label": "Material class",
+      "description": "General material class from the controlled vocabulary.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/material_class",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.cement_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "cement_type",
+      "label": "Cement type",
+      "description": "Cement classification, designation, or product description.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/cement_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.printable",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "printable",
+      "label": "Printable",
+      "description": "Indicates whether the material is intended for additive manufacturing.",
+      "dataType": "boolean",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "true",
+        "false",
+        "missing"
+      ],
+      "options": [
+        "yes",
+        "no"
+      ],
+      "encoding": "yes-no",
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/printable",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.self_consolidating",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "self_consolidating",
+      "label": "Self consolidating",
+      "description": "Indicates whether the material is self consolidating.",
+      "dataType": "boolean",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "true",
+        "false",
+        "missing"
+      ],
+      "options": [
+        "yes",
+        "no"
+      ],
+      "encoding": "yes-no",
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/self_consolidating",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.cement_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "cement_content_kg_m3",
+      "label": "Cement content",
+      "description": "Cement mass per unit concrete volume.",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": true,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/cement_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.water_binder_ratio",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "water_binder_ratio",
+      "label": "Water binder ratio",
+      "description": "Ratio of water mass to total binder mass.",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": true,
+      "multiple": false,
+      "unit": "dimensionless",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/water_binder_ratio",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.silica_fume_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "silica_fume_content_kg_m3",
+      "label": "Silica fume content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/silica_fume_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fly_ash_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fly_ash_content_kg_m3",
+      "label": "Fly ash content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fly_ash_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fly_ash_class",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fly_ash_class",
+      "label": "Fly ash class",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fly_ash_class",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.slag_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "slag_content_kg_m3",
+      "label": "Slag content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/slag_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fine_aggregate_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fine_aggregate_content_kg_m3",
+      "label": "Fine aggregate content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fine_aggregate_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fine_aggregate_dry_density_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fine_aggregate_dry_density_kg_m3",
+      "label": "Fine aggregate dry density",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fine_aggregate_dry_density_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.coarse_aggregate_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "coarse_aggregate_content_kg_m3",
+      "label": "Coarse aggregate content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/coarse_aggregate_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.coarse_aggregate_dry_density_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "coarse_aggregate_dry_density_kg_m3",
+      "label": "Coarse aggregate dry density",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/coarse_aggregate_dry_density_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.max_aggregate_size_mm",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "max_aggregate_size_mm",
+      "label": "Maximum aggregate size",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "mm",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/max_aggregate_size_mm",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.aggregate_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "aggregate_type",
+      "label": "Aggregate type",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/aggregate_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.superplasticizer_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "superplasticizer_type",
+      "label": "Superplasticizer type",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/superplasticizer_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.superplasticizer_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "superplasticizer_content_kg_m3",
+      "label": "Superplasticizer content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/superplasticizer_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.water_reducer_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "water_reducer_type",
+      "label": "Water reducer type",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/water_reducer_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.water_reducer_content_ml_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "water_reducer_content_ml_m3",
+      "label": "Water reducer content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "mL/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/water_reducer_content_ml_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.air_entrainment_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "air_entrainment_type",
+      "label": "Air entrainment type",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/air_entrainment_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.air_entrainment_content_ml_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "air_entrainment_content_ml_m3",
+      "label": "Air entrainment content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "mL/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/air_entrainment_content_ml_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.rheology_modifier_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "rheology_modifier_type",
+      "label": "Rheology modifier type",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/rheology_modifier_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.rheology_modifier_content_kg_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "rheology_modifier_content_kg_m3",
+      "label": "Rheology modifier content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "kg/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/rheology_modifier_content_kg_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.hydration_accelerator_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "hydration_accelerator_type",
+      "label": "Hydration accelerator type",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/hydration_accelerator_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.hydration_accelerator_content_ml_m3",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "hydration_accelerator_content_ml_m3",
+      "label": "Hydration accelerator content",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "mL/m³",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/hydration_accelerator_content_ml_m3",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fiber_type",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fiber_type",
+      "label": "Fiber type",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fiber_type",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fiber_product_name",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fiber_product_name",
+      "label": "Fiber product name",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fiber_product_name",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fiber_volume_fraction",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fiber_volume_fraction",
+      "label": "Fiber volume fraction",
+      "description": "Reported fraction. The JSON field does not identify decimal or percent notation.",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fiber_volume_fraction",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fiber_length_mm",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fiber_length_mm",
+      "label": "Fiber length",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "mm",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fiber_length_mm",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.fiber_diameter_mm",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "fiber_diameter_mm",
+      "label": "Fiber diameter",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "mm",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/fiber_diameter_mm",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.air_content_percent_volume_concrete",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "air_content_percent_volume_concrete",
+      "label": "Air content percent volume concrete",
+      "dataType": "number",
+      "schemaType": "number",
+      "required": false,
+      "multiple": false,
+      "unit": "%",
+      "operators": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "between",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/air_content_percent_volume_concrete",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.date_of_pouring_yyyy_mm_dd",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "date_of_pouring_yyyy_mm_dd",
+      "label": "Date of pouring",
+      "description": "Casting date in ISO format.",
+      "dataType": "date",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "before",
+        "after",
+        "between",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/date_of_pouring_yyyy_mm_dd",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "material_batches.notes",
+      "category": "material_batches",
+      "entityType": "material_batches",
+      "fieldName": "notes",
+      "label": "Notes",
+      "description": "Additional information about the mixture, batching procedure, curing protocol, constituent materials, or specimen preparation.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "material_batches_schema.json",
+        "path": "#/properties/notes",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.specimen_id",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "specimen_id",
+      "label": "Specimen ID",
+      "description": "Unique specimen identifier.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/specimen_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.source_id",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "source_id",
+      "label": "Source ID",
+      "description": "Source identifier.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/source_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.batch_id",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "batch_id",
+      "label": "Batch ID",
+      "description": "Associated material batch identifier.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/batch_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.geometry_id",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "geometry_id",
+      "label": "Geometry ID",
+      "description": "Geometry identifier referencing an entry in the geometry tab.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/geometry_id",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.longitudinal_reinforcement",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "longitudinal_reinforcement",
+      "label": "Longitudinal reinforcement",
+      "description": "Indicates presence of longitudinal reinforcement.",
+      "dataType": "boolean",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "true",
+        "false",
+        "missing"
+      ],
+      "options": [
+        "yes",
+        "no"
+      ],
+      "encoding": "yes-no",
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/longitudinal_reinforcement",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.transverse_reinforcement",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "transverse_reinforcement",
+      "label": "Transverse reinforcement",
+      "description": "Indicates presence of transverse reinforcement such as stirrups or ties.",
+      "dataType": "boolean",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "true",
+        "false",
+        "missing"
+      ],
+      "options": [
+        "yes",
+        "no"
+      ],
+      "encoding": "yes-no",
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/transverse_reinforcement",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.external_reinforcement",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "external_reinforcement",
+      "label": "External reinforcement",
+      "description": "Indicates presence of externally bonded or externally attached reinforcement systems.",
+      "dataType": "boolean",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "true",
+        "false",
+        "missing"
+      ],
+      "options": [
+        "yes",
+        "no"
+      ],
+      "encoding": "yes-no",
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/external_reinforcement",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.printed_specimen",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "printed_specimen",
+      "label": "Printed specimen",
+      "description": "Indicates whether the specimen was produced through additive manufacturing.",
+      "dataType": "boolean",
+      "schemaType": "string",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "true",
+        "false",
+        "missing"
+      ],
+      "options": [
+        "yes",
+        "no"
+      ],
+      "encoding": "yes-no",
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/printed_specimen",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "specimens.notes",
+      "category": "specimens",
+      "entityType": "specimens",
+      "fieldName": "notes",
+      "label": "Notes",
+      "description": "Additional information describing the specimen configuration, reinforcement arrangement, fabrication procedure, or specimen labeling convention.",
+      "dataType": "text",
+      "schemaType": "string",
+      "required": false,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "specimens_schema.json",
+        "path": "#/properties/notes",
+        "kind": "schema"
+      }
+    },
+    {
+      "id": "printing_variables.printing_id",
+      "category": "printing_variables",
+      "entityType": "printing_variables",
+      "fieldName": "printing_id",
+      "label": "Printing ID",
+      "description": "Local identifier. Example PRI0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/printing_variables/identifier",
+        "kind": "hierarchy"
+      }
+    },
+    {
+      "id": "reinforcement_materials.reinforcement_material_id",
+      "category": "reinforcement_materials",
+      "entityType": "reinforcement_materials",
+      "fieldName": "reinforcement_material_id",
+      "label": "Reinforcement material ID",
+      "description": "Local identifier. Example RMT0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/reinforcement_materials/identifier",
+        "kind": "hierarchy"
+      }
+    },
+    {
+      "id": "reinforcement_layouts.reinforcement_layout_id",
+      "category": "reinforcement_layouts",
+      "entityType": "reinforcement_layouts",
+      "fieldName": "reinforcement_layout_id",
+      "label": "Reinforcement layout ID",
+      "description": "Local identifier. Example RFL0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/reinforcement_layouts/identifier",
+        "kind": "hierarchy"
+      }
+    },
+    {
+      "id": "reinforcement_components.reinforcement_component_id",
+      "category": "reinforcement_components",
+      "entityType": "reinforcement_components",
+      "fieldName": "reinforcement_component_id",
+      "label": "Reinforcement component ID",
+      "description": "Local identifier. Example REF0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/reinforcement_components/identifier",
+        "kind": "hierarchy"
+      }
+    },
+    {
+      "id": "tests.test_id",
+      "category": "tests",
+      "entityType": "tests",
+      "fieldName": "test_id",
+      "label": "Test ID",
+      "description": "Local identifier. Example TST0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/tests/identifier",
+        "kind": "hierarchy"
+      }
+    },
+    {
+      "id": "devices_and_supports.device_id",
+      "category": "devices_and_supports",
+      "entityType": "devices_and_supports",
+      "fieldName": "device_id",
+      "label": "Device ID",
+      "description": "Local identifier. Example DEV0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/devices_and_supports/identifier",
+        "kind": "hierarchy"
+      }
+    },
+    {
+      "id": "loading_histories.loading_id",
+      "category": "loading_histories",
+      "entityType": "loading_histories",
+      "fieldName": "loading_id",
+      "label": "Loading ID",
+      "description": "Local identifier. Example LDG0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/loading_histories/identifier",
+        "kind": "hierarchy"
+      }
+    },
+    {
+      "id": "data.data_id",
+      "category": "data",
+      "entityType": "data",
+      "fieldName": "data_id",
+      "label": "Data ID",
+      "description": "Local identifier. Example DAT0001.",
+      "dataType": "text",
+      "required": true,
+      "multiple": false,
+      "operators": [
+        "eq",
+        "ne",
+        "contains",
+        "starts",
+        "has",
+        "missing"
+      ],
+      "source": {
+        "file": "database_hierarchy.json",
+        "path": "#/database_hierarchy/data/identifier",
+        "kind": "hierarchy"
+      }
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "format": "civita-mock-v1",
+  "synthetic": true,
+  "dataset_id": "printed-concrete",
+  "records": {
+    "literature_sources": [
+      {
+        "source_id": "SRC0005",
+        "title": "Extrusion-printed mortar and interlayer strength",
+        "authors": "CIVITA demonstration team",
+        "year": 2025,
+        "source_type": "dataset",
+        "peer_reviewed": "no",
+        "notes": "Entirely synthetic demonstration program. Values are illustrative."
+      }
+    ],
+    "keywords": [
+      {
+        "source_id": "SRC0005",
+        "keyword": "additive manufacturing"
+      },
+      {
+        "source_id": "SRC0005",
+        "keyword": "extrusion"
+      },
+      {
+        "source_id": "SRC0005",
+        "keyword": "printed mortar"
+      },
+      {
+        "source_id": "SRC0005",
+        "keyword": "interlayer bond"
+      },
+      {
+        "source_id": "SRC0005",
+        "keyword": "anisotropy"
+      }
+    ],
+    "material_batches": [
+      {
+        "batch_id": "BAT0001",
+        "source_id": "SRC0005",
+        "batch_label": "3DP-A",
+        "material_class": "mortar",
+        "cement_content_kg_m3": 650,
+        "water_binder_ratio": 0.35,
+        "printable": "yes",
+        "date_of_pouring_yyyy_mm_dd": "2025-02-06",
+        "max_aggregate_size_mm": 2
+      },
+      {
+        "batch_id": "BAT0002",
+        "source_id": "SRC0005",
+        "batch_label": "3DP-B",
+        "material_class": "mortar",
+        "cement_content_kg_m3": 610,
+        "water_binder_ratio": 0.37,
+        "printable": "yes",
+        "max_aggregate_size_mm": 3
+      },
+      {
+        "batch_id": "BAT0003",
+        "source_id": "SRC0005",
+        "batch_label": "Mix design only",
+        "material_class": "mortar",
+        "cement_content_kg_m3": 600,
+        "water_binder_ratio": 0.4,
+        "printable": "yes"
+      }
+    ],
+    "geometries": [
+      {
+        "geometry_id": "GEO0001",
+        "source_id": "SRC0005",
+        "specimen_geometry_type": "cube",
+        "geometry_file_name": "GEO0001_geometry.json"
+      },
+      {
+        "geometry_id": "GEO0002",
+        "source_id": "SRC0005",
+        "specimen_geometry_type": "dog_bone",
+        "geometry_file_name": "GEO0002_geometry.json"
+      },
+      {
+        "geometry_id": "GEO0003",
+        "source_id": "SRC0005",
+        "specimen_geometry_type": "prism",
+        "geometry_file_name": "GEO0003_geometry.json"
+      }
+    ],
+    "specimens": [
+      {
+        "specimen_id": "SPC0001",
+        "source_id": "SRC0005",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0001",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "yes"
+      },
+      {
+        "specimen_id": "SPC0002",
+        "source_id": "SRC0005",
+        "batch_id": "BAT0001",
+        "geometry_id": "GEO0002",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "yes"
+      },
+      {
+        "specimen_id": "SPC0003",
+        "source_id": "SRC0005",
+        "batch_id": "BAT0002",
+        "geometry_id": "GEO0003",
+        "longitudinal_reinforcement": "no",
+        "transverse_reinforcement": "no",
+        "external_reinforcement": "no",
+        "printed_specimen": "yes"
+      }
+    ],
+    "tests": [
+      {
+        "test_id": "TST0001",
+        "source_id": "SRC0005",
+        "specimen_id": "SPC0001",
+        "test_type": "axial_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | unconfined_compressive_failure"
+        ],
+        "age_days": 7
+      },
+      {
+        "test_id": "TST0002",
+        "source_id": "SRC0005",
+        "specimen_id": "SPC0002",
+        "test_type": "direct_tensile_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "strength | tensile_failure"
+        ],
+        "age_days": 28
+      },
+      {
+        "test_id": "TST0003",
+        "source_id": "SRC0005",
+        "specimen_id": "SPC0003",
+        "test_type": "three_point_bending_test",
+        "number_of_repeats": 2,
+        "main_observed_mechanisms": [
+          "fracture | crack_localization"
+        ],
+        "age_days": 28
+      }
+    ],
+    "data": [
+      {
+        "data_id": "DAT0001",
+        "source_id": "SRC0005",
+        "test_id": "TST0001",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "device_id": "DEV0001",
+        "quantity_reported": "compressive_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 26.5,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0002",
+        "source_id": "SRC0005",
+        "test_id": "TST0002",
+        "test_repeat_id": "TRP0001",
+        "data_type": "scalar",
+        "quantity_reported": "tensile_strength",
+        "quantity_reported_type": "derived",
+        "quantity_reported_mean": 2.1,
+        "units": "MPa"
+      },
+      {
+        "data_id": "DAT0003",
+        "source_id": "SRC0005",
+        "test_id": "TST0003",
+        "test_repeat_id": "TRP0001",
+        "data_type": "curve",
+        "x_quantity_reported": "deflection",
+        "y_quantity_reported": "load",
+        "file_name": "DAT0003_load_deflection.csv"
+      }
+    ],
+    "devices_and_supports": [
+      {
+        "device_id": "DEV0001",
+        "source_id": "SRC0005",
+        "test_id": "TST0001",
+        "device_type": "actuator"
+      },
+      {
+        "device_id": "DEV0002",
+        "source_id": "SRC0005",
+        "test_id": "TST0001",
+        "device_type": "LVDT"
+      }
+    ],
+    "loading_histories": [
+      {
+        "loading_id": "LDG0001",
+        "source_id": "SRC0005",
+        "test_id": "TST0001",
+        "device_id": "DEV0001",
+        "loading_mode": "monotonic"
+      }
+    ],
+    "printing_variables": [
+      {
+        "printing_id": "PRI0001",
+        "source_id": "SRC0005",
+        "printing_speed_mm_sec": 45
+      },
+      {
+        "printing_id": "PRI0002",
+        "source_id": "SRC0005",
+        "printing_speed_mm_sec": 55
+      }
+    ]
+  },
+  "specimen_links": {
+    "SPC0001": {
+      "printing_id": "PRI0001"
+    },
+    "SPC0002": {
+      "printing_id": "PRI0001"
+    },
+    "SPC0003": {
+      "printing_id": "PRI0002"
+    }
+  }
+}
+
