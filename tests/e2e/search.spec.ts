@@ -66,8 +66,10 @@ test("sorts, paginates and customizes the results table", async ({ page }) => {
   await expect(page.locator("tbody tr").first()).toContainText("SRC0006");
   await page.getByText("Columns", { exact: true }).click();
   await page.getByRole("searchbox", { name: "Find result columns" }).fill("water_binder_ratio");
-  await page.getByRole("checkbox", { name: /Water binder ratio/i }).check();
+  const columnToggle = page.getByRole("checkbox", { name: /Water binder ratio/i });
+  await columnToggle.click();
   await expect(page.getByRole("columnheader", { name: /Water binder ratio/i })).toBeVisible();
+  await expect(columnToggle).toBeChecked();
   await page.getByText("Columns", { exact: true }).click();
   await page.getByLabel("Rows per page").selectOption("5");
   await expect(page.getByText("Showing 1–5 of 17")).toBeVisible();
@@ -85,6 +87,30 @@ test("searches parameter descriptions, validates incomplete conditions and fits 
   await page.getByRole("button", { name: "Run search" }).click();
   await expect(page.getByText("Showing 1–5 of 5")).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
-  await page.getByRole("link", { name: "About" }).click();
-  await expect(page.getByRole("heading", { name: "About CIVITA" })).toBeVisible();
+});
+
+test("keeps the full CIVITA logo beside the white banner text and shows only Search in the navigation", async ({ page }) => {
+  await page.goto("/");
+  const hero = page.getByRole("region", { name: "Concrete Database Search" });
+  const logo = hero.getByRole("img", { name: "CIVITA logo" });
+  const navigation = page.getByRole("navigation", { name: "Main navigation" });
+
+  await expect(navigation.getByRole("link")).toHaveText(["Search"]);
+  await expect(hero).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(hero).toHaveCSS("background-image", "none");
+  await expect.poll(() => logo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+
+  for (const width of [1280, 768, 390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    await expect(logo).toBeVisible();
+    const imageBounds = (await logo.boundingBox())!;
+    const bannerBounds = (await hero.boundingBox())!;
+    const textBounds = (await hero.locator(".hero-copy").boundingBox())!;
+    expect(imageBounds.width).toBeCloseTo(imageBounds.height);
+    expect(textBounds.x + textBounds.width).toBeLessThan(imageBounds.x);
+    expect(imageBounds.x + imageBounds.width).toBeLessThan(bannerBounds.x + bannerBounds.width);
+    expect(imageBounds.y).toBeGreaterThan(bannerBounds.y);
+    expect(imageBounds.y + imageBounds.height).toBeLessThan(bannerBounds.y + bannerBounds.height);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+  }
 });

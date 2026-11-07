@@ -86,7 +86,7 @@ Vitest covers the registry, evaluator, data adapter, and HTTP route handlers. Th
 
 | Path | Contents |
 | --- | --- |
-| `src/app` | Search and About pages, read-only API routes |
+| `src/app` | Search page and read-only API routes |
 | `src/components` | Parameter browser, query builder, results, and dataset viewer |
 | `src/lib/schema` | Generated registry and explicitly provisional mappings |
 | `src/lib/search` | Query validation, relationship indexing, evaluation, and projection |
