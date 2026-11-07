@@ -2,6 +2,8 @@
 
 CIVITA stands for Computational Infrastructure for Validation, Integration, Testing, and Assessment. This read-only research prototype supports the Grand Challenge on the Calibration, Validation, and Benchmarking of Concrete Computational Models. Researchers can search across linked scientific records, inspect the evidence for a match, and download the complete source JSON.
 
+The CIVITA Network maintains the search application and the authoritative experimental schema in separate repositories. [Search application](https://github.com/civita-network/civita-concrete-database-search) · [Experimental schema](https://github.com/civita-network/civita-concrete-database-schema)
+
 The separate CIVITA ingestion application prepares and publishes datasets. This workspace uses six synthetic experimental programs with 17 tests and 12 material batches, including a mix design with no associated test. The collection spans compression, three- and four-point bending, direct tension, fiber-reinforced concrete, reinforced members, and extrusion-printed mortar.
 
 ## Run locally
@@ -15,6 +17,8 @@ npm run dev
 
 Open [the local search workspace](http://localhost:3000). For a production build, use `npm run build` followed by `npm start`. The scripts use Next.js App Router with Webpack, strict TypeScript, React, Tailwind CSS, shadcn/ui primitives, Lucide icons, TanStack Table, and Zod.
 
+Local production builds and Vercel deployments use the committed `src/lib/schema/registry.generated.json` and the application's own synthetic data. The schema checkout is needed only for schema maintenance and verification. Regeneration is a manual development step.
+
 ## Search and inspect
 
 1. Open a category or search for a parameter by name or description. Add a parameter from the browser, or choose a category and parameter in the query builder.
@@ -25,21 +29,26 @@ Open [the local search workspace](http://localhost:3000). For a production build
 
 The [search semantics](docs/search-semantics.md) define the linked paths, Boolean grouping, missing values, numeric comparisons, and how results are projected.
 
-## Shared schema
+## Authoritative schema
 
-The checked-in registry is derived from the shared JSON hierarchy and record schemas. The application and build use this registry directly. Regeneration and authoritative schema tests read the shared directory.
+The generated registry derives its category relationships and record fields from `database_hierarchy.json` and the experimental record schemas. The application adds provisional workbook-based fields and demo options in `src/lib/schema/provisional.ts`.
 
-The default is `reference/`, a local junction on Windows and an ignored path in Git. From the search directory, create it if the path is absent.
+For schema maintenance and verification, clone the repositories side by side.
 
-```powershell
-New-Item -ItemType Junction -Path reference -Target (Resolve-Path ../civita-concrete-database-schema).Path
+```text
+Documents/CIVITA/
+├── civita-concrete-database-search/
+└── civita-concrete-database-schema/
 ```
 
-Alternatively, pass a path to the shared directory, or set the environment variable `CIVITA_SCHEMA_DIR`.
+Schema generation and verification use `--reference <path>` if supplied, then `CIVITA_SCHEMA_DIR`, then `../civita-concrete-database-schema` relative to the application root. Relative override paths are interpreted from the command's working directory. Unit tests use the same environment variable and sibling default.
+
+Run `schema:check` to compare the committed registry and coverage report with the authoritative schemas without writing files. After an intentional schema or mapping change, run `schema:generate`, review both generated diffs, and run the check again.
 
 ```bash
-npm run schema:generate -- --reference ../civita-concrete-database-schema
-npm run schema:check -- --reference ../civita-concrete-database-schema
+npm run schema:check
+npm run schema:generate
+npm run schema:check -- --reference /path/to/civita-concrete-database-schema
 ```
 
 Review the [schema analysis](docs/schema-analysis.md), [generated field inventory](docs/schema-coverage.generated.md), and [coverage issues](docs/schema-issues.md) before updating the mappings.
@@ -48,12 +57,13 @@ Review the [schema analysis](docs/schema-analysis.md), [generated field inventor
 
 ```bash
 npm run test
+npm run lint
 npx playwright install chromium
 npm run test:e2e
 npm run build
 ```
 
-Vitest covers the registry, evaluator, data adapter, and HTTP route handlers. The two tests that compare or validate against the authoritative JSON run when the shared schema directory is available. Playwright starts a local server on port 3197 and exercises the browser workflow. To use an existing Microsoft Edge installation, set `PLAYWRIGHT_CHANNEL=msedge` in your shell before running the browser tests.
+Vitest covers the registry, evaluator, data adapter, and HTTP route handlers. The two schema-backed tests compare the generated files and validate the synthetic records. They are skipped when the default sibling directory is absent and no override is configured. Playwright starts a local server on port 3197 and exercises the browser workflow. To use an existing Microsoft Edge installation, set `PLAYWRIGHT_CHANNEL=msedge` in your shell before running the browser tests.
 
 ## API
 
@@ -95,10 +105,4 @@ Vitest covers the registry, evaluator, data adapter, and HTTP route handlers. Th
 | `scripts`, `docs`, `tests` | Registry generation, scientific and architecture notes, and automated verification |
 
 The [architecture notes](docs/architecture.md) describe the future Supabase Storage and PostgreSQL adapter.
-
-## Create an independent GitHub repository
-
-The present application directory is inside the parent Concrete Database worktree. To create an independent repository without changing the parent Git configuration, create an empty GitHub repository and clone it into a separate directory outside that worktree. Verify the top level with `git rev-parse --show-toplevel` in the new checkout.
-
-Transfer the application source, configuration, lockfile, documentation, tests, generated registry, and synthetic data into that checkout. Exclude `reference/`, Git metadata, dependencies, and build or test output. Re-create the junction there or point `CIVITA_SCHEMA_DIR` to the original shared directory. Review `git status --short --ignored` before committing. Then commit and push from the independent checkout. If the parent project should also reference the new repository, make that a separate repository-maintainer decision.
 

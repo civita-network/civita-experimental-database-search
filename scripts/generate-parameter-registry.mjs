@@ -1,12 +1,12 @@
 import { readFile, readdir, writeFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { appRoot, resolveSchemaDirectory } from "./schema-directory.mjs";
 
-const root = fileURLToPath(new URL("../", import.meta.url));
 const args = process.argv.slice(2);
 const refIndex = args.indexOf("--reference");
-const directory = resolve(refIndex < 0 ? process.env.CIVITA_SCHEMA_DIR || resolve(root, "reference") : args[refIndex + 1] ?? "");
-if (refIndex >= 0 && !args[refIndex + 1]) throw new Error("--reference needs a directory path.");
+const reference = refIndex >= 0 ? args[refIndex + 1] : undefined;
+if (refIndex >= 0 && (!reference || reference.startsWith("--"))) throw new Error("--reference needs a directory path.");
+const directory = resolveSchemaDirectory(reference);
 const check = args.includes("--check");
 const readJson = async (file) => JSON.parse((await readFile(resolve(directory, file), "utf8")).replace(/^\uFEFF/, ""));
 const operatorSets = {
@@ -32,9 +32,13 @@ const unitFor = (name) => {
   if (name === "water_binder_ratio") return "dimensionless";
   return [["_kg_m3", "kg/m³"], ["_ml_m3", "mL/m³"], ["_mm", "mm"]].find(([suffix]) => name.endsWith(suffix))?.[1];
 };
-const files = (await readdir(directory)).filter((name) => name.endsWith(".json")).sort();
+const setupHint = "Clone civita-concrete-database-schema beside the application or specify its location with --reference or CIVITA_SCHEMA_DIR.";
+const entries = await readdir(directory).catch((error) => {
+  throw new Error(`Cannot read the authoritative schema directory at ${directory} (${error.code}). ${setupHint}`);
+});
+const files = entries.filter((name) => name.endsWith(".json")).sort();
 const hierarchyFile = files.find((name) => /^database[-_]hierarchy\.json$/.test(name));
-if (!hierarchyFile) throw new Error(`No database hierarchy JSON in ${directory}`);
+if (!hierarchyFile) throw new Error(`No database hierarchy JSON in ${directory}. ${setupHint}`);
 const { database_hierarchy: hierarchy } = await readJson(hierarchyFile);
 const categories = Object.entries(hierarchy).map(([id, entry]) => {
   const parents = (entry.parents ?? (entry.parent ? [entry.parent] : [])).map((parent) => {
@@ -128,7 +132,7 @@ if (unindexed.length) {
   report.push("## JSON definitions requiring a mapping", "", ...unindexed.map((item) => `- ${item.join(" · ")}`), "");
 }
 async function output(path, content) {
-  const target = resolve(root, path);
+  const target = resolve(appRoot, path);
   if (check) {
     if ((await readFile(target, "utf8")).replace(/\r\n/g, "\n") !== content) throw new Error(`${path} is stale. Run npm run schema:generate.`);
     return;

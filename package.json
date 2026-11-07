@@ -7,6 +7,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
+    "lint": "eslint .",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "schema:generate": "node scripts/generate-parameter-registry.mjs",
@@ -32,6 +33,8 @@
     "@types/react-dom": "^19.2.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.5",
     "tailwindcss": "^4.2.0",
     "typescript": "~5.9.3",
     "vitest": "^4.0.0"

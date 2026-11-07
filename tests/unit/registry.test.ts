@@ -7,10 +7,12 @@ import { expect, test } from "vitest";
 import { categories, parameterById, parameters } from "@/lib/schema/registry";
 import type { Dataset } from "@/lib/types";
 import { indexDataset } from "@/lib/search/relationships";
+import { appRoot, resolveSchemaDirectory } from "../../scripts/schema-directory.mjs";
 
-const reference = resolve(process.env.CIVITA_SCHEMA_DIR || "reference");
+const reference = resolveSchemaDirectory();
 const json = (file: string) => JSON.parse(readFileSync(file, "utf8").replace(/^\uFEFF/, ""));
-const hasSchemas = existsSync(resolve(reference, "specimens_schema.json"));
+const checkSchemas = Boolean(process.env.CIVITA_SCHEMA_DIR) || existsSync(reference);
+const fixtures = resolve(appRoot, "mock-data");
 
 test("registered fields retain exact names, provenance and compatible operators", () => {
   expect(new Set(parameters.map((p) => p.id)).size).toBe(parameters.length);
@@ -25,8 +27,9 @@ test("registered fields retain exact names, provenance and compatible operators"
   expect(parameterById.get("material_batches.max_aggregate_size_mm")?.unit).toBe("mm");
 });
 
-test.skipIf(!hasSchemas)("generated artifacts match the actual shared JSON and contain each record field", () => {
-  expect(execFileSync(process.execPath, ["scripts/generate-parameter-registry.mjs", "--reference", reference, "--check"], { encoding: "utf8" })).toContain("Verified");
+test.skipIf(!checkSchemas)("generated artifacts match the actual shared JSON and contain each record field", () => {
+  const generator = resolve(appRoot, "scripts/generate-parameter-registry.mjs");
+  expect(execFileSync(process.execPath, [generator, "--check"], { encoding: "utf8" })).toContain("Verified");
   const authoritative = parameters.filter((parameter) => parameter.source.kind === "schema");
   let fields = 0;
   for (const { id, schemaFile } of categories) {
@@ -41,7 +44,7 @@ test.skipIf(!hasSchemas)("generated artifacts match the actual shared JSON and c
   expect(authoritative.length).toBe(fields);
 });
 
-test.skipIf(!hasSchemas)("every synthetic record passes its authoritative schema and links resolve", () => {
+test.skipIf(!checkSchemas)("every synthetic record passes its authoritative schema and links resolve", () => {
   const ajv = new Ajv2020({ allErrors: true });
   addFormats(ajv);
   const validators = categories.flatMap(({ id, schemaFile }) => {
@@ -49,8 +52,8 @@ test.skipIf(!hasSchemas)("every synthetic record passes its authoritative schema
     const schema = json(resolve(reference, schemaFile));
     return [{ id, array: schema.type === "array", validate: ajv.compile(schema) }];
   });
-  for (const name of readdirSync("mock-data").filter((file) => file.endsWith(".json"))) {
-    const dataset: Dataset = json(resolve("mock-data", name));
+  for (const name of readdirSync(fixtures).filter((file) => file.endsWith(".json"))) {
+    const dataset: Dataset = json(resolve(fixtures, name));
     expect(() => indexDataset(dataset)).not.toThrow();
     for (const { id, array, validate } of validators) {
       const records = dataset.records[id] ?? [];

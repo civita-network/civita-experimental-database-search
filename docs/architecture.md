@@ -2,7 +2,9 @@
 
 The Next.js App Router renders the initial search server-side and restores a versioned query from its URL. The interactive query builder sends typed requests to `POST /api/search`. The results table delegates search, ordering, column projection, and pagination to the server. The detail viewer requests one source at a time.
 
-The query parser checks shape, allowed operators, enum membership, and date/range validity with Zod. The API bounds request length, nesting, node count, column count, and page size. The mock adapter reads the source files from `mock-data/`, indexes them by dataset slug, and resolves the hierarchy within each file. It caches the immutable index for the life of the process. Unit tests compare the generated registry with the shared JSON and validate the original mock records with those schemas when the reference directory is configured.
+The query parser checks shape, allowed operators, enum membership, and date/range validity with Zod. The API bounds request length, nesting, node count, column count, and page size. The mock adapter reads the source files from `mock-data/`, indexes them by dataset slug, and resolves the hierarchy within each file. It caches the immutable index for the life of the process.
+
+The build and runtime import the committed search registry. During development, `npm run schema:check` compares the registry and coverage report with the authoritative JSON. The schema-backed unit tests also validate the mock records when a sibling checkout or an explicit override supplies the schemas. [Schema setup](../README.md#authoritative-schema)
 
 The frontend consumes the query and response contracts defined in `src/lib/types.ts`. It shares the generated catalog for its controls. The server pages and routes depend on the `SearchService` interface. The service composition in `src/lib/services/index.ts` currently supplies the mock adapter. A new adapter can preserve the same routes and payloads.
 

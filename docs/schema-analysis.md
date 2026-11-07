@@ -1,6 +1,6 @@
 # Shared schema analysis
 
-The Windows `reference/` junction resolves to the sibling `civita-concrete-database-schema` directory. The hierarchy file in that directory is `database_hierarchy.json`. The record definitions use JSON Schema draft 2020-12. The analysis read all six JSON files, compared the experimental tab headers and vocabulary tab in the workbook, and reviewed the hierarchy, units policy, record definitions, and vocabularies in the supporting PDF (pp. 8–17, 18–37, 54–93). The PNG and PowerPoint are illustrations of the hierarchy.
+The search application derives its registry from the authoritative `database_hierarchy.json` and five JSON Schema draft 2020-12 record definitions. Registry generation and verification default to the sibling schema checkout. The workbook's experimental and vocabulary tabs and the supporting PDF (pp. 8–17, 18–37, 54–93) informed the analysis and the app's provisional mappings. The PNG and PowerPoint illustrate the hierarchy. [Authoritative schema repository](https://github.com/civita-network/civita-concrete-database-schema) · [Local schema commands](../README.md#authoritative-schema)
 
 ## Entities and relationships
 
