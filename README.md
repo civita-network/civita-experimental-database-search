@@ -106,3 +106,9 @@ Vitest covers the registry, evaluator, data adapter, and HTTP route handlers. Th
 
 The [architecture notes](docs/architecture.md) describe the future Supabase Storage and PostgreSQL adapter.
 
+## License and Copyright
+
+Original CIVITA search software is licensed under [MIT](LICENSE). Documentation, schema-derived material, synthetic data, and the CIVITA logo follow the [local license scope](LICENSING.md). Copyright in original software contributions remains with the respective contributors or other applicable rights holders.
+
+See the [CIVITA licensing policy](https://github.com/civita-network/civita/blob/main/LICENSING.md), [authors and attribution](https://github.com/civita-network/civita/blob/main/AUTHORS.md), and [contribution guidelines](https://github.com/civita-network/civita/blob/main/CONTRIBUTING.md).
+
